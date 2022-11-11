@@ -20,35 +20,23 @@ public class BoardController {
     }
 
     @PostMapping("/board")
-    public Board addBoard() {
-        Board board = Board.builder()
-                .title("안녕하세요.")
-                .content("반갑습니다.")
-                .writer("testUser")
-                .build();
-        return boardService.addBoard(board);
+    public BoardDto addBoard(@RequestBody BoardDto boardDto) {
+        return boardService.addBoard(boardDto);
     }
 
-    @PutMapping("/board")
-    public Board editBoard() {
-        Board board = Board.builder()
-                .boardNo(1L)
-                .title("안녕하세요2.")
-                .content("반갑습니다2.")
-                .writer("testUser")
-                .build();
-
-        return boardService.editBoard(board);
+    @PutMapping("/board/{boardNo}")
+    public BoardDto editBoard(@RequestBody BoardDto boardDto) {
+        return boardService.editBoard(boardDto);
     }
 
-    @PatchMapping("/board")
-    public Board editBoardDetail() {
-        return boardService.editBoardDetail(1L, "반갑습니다3");
+    @PatchMapping("/board/{boardNo}")
+    public BoardDto editBoardDetail(@PathVariable long boardNo, String content) {
+        return boardService.editBoardDetail(boardNo, content);
     }
 
-    @DeleteMapping("/board")
-    public void deleteBoard() {
-        boardService.deleteBoard(1L);
+    @DeleteMapping("/board/{boardNo}")
+    public void deleteBoard(@PathVariable long boardNo) {
+        boardService.deleteBoard(boardNo);
     }
 }
 

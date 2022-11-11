@@ -1,5 +1,6 @@
 package com.endless.study.service;
 
+import com.endless.study.controller.BoardDto;
 import com.endless.study.entity.Board;
 import com.endless.study.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
@@ -16,28 +17,34 @@ public class BoardService {
         return boardRepository.findAll();
     }
 
-    public Board addBoard(Board board) {
+    public BoardDto addBoard(BoardDto boardDto) {
+        Board board = Board.builder()
+                .title(boardDto.getTitle())
+                .content(boardDto.getContent())
+                .writer(boardDto.getWriter())
+                .build();
         boardRepository.save(board);
-        return board;
+        return BoardDto.fromEntity(board);
     }
 
-    public Board editBoard(Board board) {
-        Board findBoard = boardRepository.findById(board.getBoardNo()).orElseThrow();
-        findBoard.setTitle(board.getTitle());
-        findBoard.setContent(board.getContent());
+    public BoardDto editBoard(BoardDto boardDto) {
+        Board findBoard = boardRepository.findById(boardDto.getBoardNo()).orElseThrow();
+        findBoard.setTitle(boardDto.getTitle());
+        findBoard.setContent(boardDto.getContent());
+        findBoard.setViews(boardDto.getViews() + 1);
 
         boardRepository.save(findBoard);
 
-        return findBoard;
+        return BoardDto.fromEntity(findBoard);
     }
 
-    public Board editBoardDetail(Long boardNo, String content) {
+    public BoardDto editBoardDetail(Long boardNo, String content) {
         Board findBoard = boardRepository.findById(boardNo).orElseThrow();
         findBoard.setContent(content);
 
         boardRepository.save(findBoard);
 
-        return findBoard;
+        return BoardDto.fromEntity(findBoard);
     }
 
     public void deleteBoard(Long boardNo) {
