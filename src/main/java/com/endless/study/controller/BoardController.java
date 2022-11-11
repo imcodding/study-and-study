@@ -1,5 +1,6 @@
 package com.endless.study.controller;
 
+import com.endless.study.dto.BoardDto;
 import com.endless.study.entity.Board;
 import com.endless.study.service.BoardService;
 import lombok.RequiredArgsConstructor;

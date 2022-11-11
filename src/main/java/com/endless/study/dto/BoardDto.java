@@ -1,4 +1,4 @@
-package com.endless.study.controller;
+package com.endless.study.dto;
 
 import com.endless.study.entity.Board;
 import lombok.Builder;
