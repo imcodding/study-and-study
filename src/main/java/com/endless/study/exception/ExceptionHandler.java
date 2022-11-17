@@ -55,7 +55,7 @@ public class ExceptionHandler {
                 .build();
     }
 
-    @org.springframework.web.bind.annotation.ExceptionHandler
+    @org.springframework.web.bind.annotation.ExceptionHandler(MemberException.class)
     @ResponseBody
     public MemberErrorResponse handleMemberException(Exception e, HttpServletRequest request) {
         log.error("url: {}, message: {}", request.getRequestURI(), e.getMessage());

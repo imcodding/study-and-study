@@ -46,7 +46,7 @@ public class MemberService {
         MemberDto memberDto = MemberDto.fromEntity(member);
         memberDto.setTargetList(targetList);
 
-        return MemberDto.fromEntity(member);
+        return memberDto;
     }
 
     public Target addTarget(Long memberNo) {
